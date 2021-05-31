@@ -1,4 +1,4 @@
-import { shallowMount } from "@vue/test-utils";
+import { mount, shallowMount } from "@vue/test-utils";
 import App from "@/App.vue";
 
 test('App.vue muestra el titulo de las notas dentro de una lista | Asegúrate de que App.vue defina en su función data la propiedad "notas", y que por cada elemento se despliegue un boton con el titulo de la nota', () => {
@@ -151,16 +151,38 @@ test('App crea una nueva nota al presionar el boton "crear nota" | Asegúrate de
     }
   });
 
-  const allButtons = wrapper.findAll('button')
+  const allButtons = wrapper.findAll('button');
 
-  const newNoteButton = allButtons.find(button => button.text().toLowerCase() === 'crear nota')
+  const newNoteButton = allButtons.find(button => button.text().toLowerCase() === 'crear nota');
 
-  await newNoteButton.trigger('click')
+  await newNoteButton.trigger('click');
 
-  expect(wrapper.vm.notas.length).toBe(3)
+  expect(wrapper.vm.notas.length).toBe(3);
 
   const newNota = wrapper.vm.notas[2];
 
-  expect(newNota.titulo).toBe('')
-  expect(newNota.contenido).toBe('')
+  expect(newNota.titulo).toBe('');
+  expect(newNota.contenido).toBe('');
+});
+
+test('App utiliza una ref para hacerle focus al input del titulo al crear nueva nota | Asegúrate de que el input del titulo de notaActual tenga una ref y esta se encuentre en focus cuando el usuario aprete el botón de nueva nota', async () => {
+  const notas = [];
+
+  const wrapper = mount(App, {
+    data() {
+      return {
+        notas,
+        notaActual: null
+      };
+    },
+    attachTo: document.body
+  });
+
+  const newNoteButton = wrapper.findAll('button').find(button => button.text().toLowerCase() === 'crear nota');
+
+  await newNoteButton.trigger('click');
+
+  expect(wrapper.vm.$refs.notaTitulo).toBeDefined();
+
+  expect(wrapper.vm.$refs.notaTitulo).toBe(document.activeElement);
 });

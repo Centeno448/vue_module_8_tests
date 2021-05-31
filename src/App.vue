@@ -16,7 +16,7 @@
       </ul>
     </nav>
     <div v-if="notaActual" class="current-note">
-      <input v-model="notaActual.titulo" type="text" />
+      <input v-model="notaActual.titulo" ref="notaTitulo" type="text" />
 
       <textarea v-model="notaActual.contenido"> </textarea>
     </div>
@@ -40,6 +40,10 @@ export default {
       this.notas.push(nuevaNota);
 
       this.notaActual = nuevaNota;
+
+      this.$nextTick(function() {
+        this.$refs.notaTitulo.focus();
+      });
     },
   },
 };
