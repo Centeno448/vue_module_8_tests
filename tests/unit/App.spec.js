@@ -165,7 +165,7 @@ test('App crea una nueva nota al presionar el boton "crear nota" | Asegúrate de
   expect(newNota.contenido).toBe('');
 });
 
-test('App utiliza una ref para hacerle focus al input del titulo al crear nueva nota | Asegúrate de que el input del titulo de notaActual tenga una ref y esta se encuentre en focus cuando el usuario aprete el botón de nueva nota', async () => {
+test('App utiliza una ref llamada notaTitulo para hacerle focus al input del titulo al crear nueva nota | Asegúrate de que el input del titulo de notaActual tenga una ref con el nombre notaTitulo y esta se encuentre en focus cuando el usuario aprete el botón de nueva nota', async () => {
   const notas = [];
 
   const wrapper = mount(App, {
