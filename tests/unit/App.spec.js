@@ -51,7 +51,7 @@ test('App.vue muestra la nota actual cuándo es seleccionada | Asegúrate de que
     }
   });
 
-  const buttons = wrapper.findAll('button').filter(button => button.text().toLowerCase() !== "crear nota");;
+  const buttons = wrapper.findAll('button').filter(button => button.text().toLowerCase() !== "crear nota");
 
   for (let i = 0; i < buttons.length; i++) {
     const button = buttons[i];
